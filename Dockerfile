@@ -7,6 +7,9 @@ WORKDIR /app
 # Copia todos los archivos del proyecto al contenedor
 COPY . .
 
+# Corrige finales de línea de Windows (CRLF) y da permiso de ejecución a mvnw
+RUN sed -i 's/\r$//' mvnw && chmod +x mvnw
+
 # Ejecuta Maven para limpiar y compilar el proyecto, generando el .jar (sin tests)
 RUN ./mvnw clean package -DskipTests
 
@@ -24,5 +27,3 @@ EXPOSE 8080
 
 # Comando para ejecutar la aplicación cuando se inicie el contenedor
 CMD ["java", "-jar", "pepe.jar"]
-
-

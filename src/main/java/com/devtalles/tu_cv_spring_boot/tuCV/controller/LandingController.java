@@ -14,11 +14,18 @@ import lombok.RequiredArgsConstructor;
 
 
 
+
 @Controller
 @RequiredArgsConstructor  
 public class LandingController {
 
     private final CvInitializationService cvInitializationService;
+
+    @GetMapping("/")
+    public String redirectToForm() {
+        return "redirect:/cv-form";
+    }
+    
 
 
     @GetMapping("/cv-form")
